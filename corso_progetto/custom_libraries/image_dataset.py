@@ -34,7 +34,7 @@ class ImageDataset:
 
         elif ds_name == 'svhn':
 
-            ds = tfds.load('svhn', split=train_test, shuffle_files=shuffle_files,
+            ds = tfds.load('svhn_cropped', split=train_test, shuffle_files=shuffle_files,
                            download=True, data_dir=data_dir, as_supervised=True, batch_size=-1)
 
         elif ds_name == 'usps':
