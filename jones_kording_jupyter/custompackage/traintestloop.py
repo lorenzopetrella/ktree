@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import numpy as np
 import torch.optim as optim
-from jones_kording.pytorchtools import EarlyStopping
+from jones_kording_jupyter.pytorchtools import EarlyStopping
 
 
 def train_test_ktree(model, trainloader, validloader, testloader, epochs=10, randorder=False, patience=60,
