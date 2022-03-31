@@ -124,9 +124,9 @@ class ktree_gen(nn.Module):
                 # Assign name of the layer, indexed by layer (i) and subtree (j)
                 name = ''.join(['w',str(j),'_',str(i)])
                 # Initialize the layer with the appropriate name
-                self.add_module(name, nn.Linear(self.k[i],self.k[i+1], bias=False))
+                self.add_module(name, nn.Linear(self.k[i],self.k[i+1]))
                 # Set bias of layer to zeros
-                # self._modules[name].bias = nn.Parameter(torch.zeros_like(self._modules[name].bias))
+                self._modules[name].bias = nn.Parameter(torch.zeros_like(self._modules[name].bias))
                 # Use custom method to re-initialize the layer weights and create freeze mask for that layer
                 self._modules[name].weight.data, freeze_mask = self.initialize(self._modules[name])
                 # Add the layer name to the list of names
@@ -136,7 +136,7 @@ class ktree_gen(nn.Module):
                     self.freeze_mask_set.append(freeze_mask)
         
         # Initialize root node, aka soma node aka output node
-        self.root = nn.Linear(Repeats, 1, bias=False)
+        self.root = nn.Linear(Repeats, 1)
         
         # Initialize nonlinearities
         self.relu = nn.LeakyReLU()
