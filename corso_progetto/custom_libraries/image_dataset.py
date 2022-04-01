@@ -1,3 +1,5 @@
+import math
+
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets as tfds
@@ -140,6 +142,21 @@ class ImageDataset:
             if shard:
                 train_images, train_labels = np.array_split(train_images, shard_number), np.array_split(train_labels,
                                                                                                         shard_number)
+            return train_images, train_labels
+
+    def bootstrap(self, train_size, validation=False):
+
+        train_size = math.floor(train_size*len(self.images))
+
+        self.shuffle()
+        train_images = self.images[0:train_size]
+        train_labels = self.labels[0:train_size]
+        valid_images = self.images[train_size:]
+        valid_labels = self.labels[train_size:]
+
+        if validation:
+            return train_images, train_labels, valid_images, valid_labels
+        else:
             return train_images, train_labels
 
 
