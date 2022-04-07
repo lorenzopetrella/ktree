@@ -39,6 +39,7 @@ class treeLayer(tf.keras.layers.Layer):
                                       name='kernel')
 
         self.summer = tf.convert_to_tensor(self.summer, dtype=tf.float32)
+        self.summer = tf.sparse.from_dense(self.summer)
         if self.use_bias:
             self.bias = self.add_weight(shape=(self.Input_size // self.divisor,),
                                         initializer=tf.keras.initializers.Zeros,
@@ -47,7 +48,7 @@ class treeLayer(tf.keras.layers.Layer):
     def call(self, inputs):
         #print(inputs.shape, self.kernel.shape)
         x = tf.math.multiply(inputs, self.kernel)
-        x = tf.matmul(x, self.summer)
+        x = tf.sparse.sparse_dense_matmul(x, self.summer)
         #masked_weights = tf.multiply(self.kernel, self.summer)
         #x = tf.matmul(inputs, masked_weights)
         if self.use_bias:
