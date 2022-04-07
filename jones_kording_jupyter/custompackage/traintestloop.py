@@ -82,7 +82,7 @@ def train_test_ktree(model, trainloader, validloader, testloader, epochs=10, ran
         # validate the model #
         ######################
         model.eval()  # prep model for evaluation
-        # TODO: the below line removes the supposed mod
+        # TODO: the line below removes the supposed mod
         valid_losses = []
         for _, data in enumerate(validloader):
             inputs, labels, _ = data
