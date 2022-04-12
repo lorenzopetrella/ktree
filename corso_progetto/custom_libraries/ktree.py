@@ -15,7 +15,7 @@ def init_weights(masker):
 
 class treeLayer(tf.keras.layers.Layer):
 
-    def __init__(self, Input_size=3072, use_bias=False, divisor=2):
+    def __init__(self, Input_size=3072, use_bias=False, divisor=2, non_neg=False):
         super(treeLayer, self).__init__()
         self.bias = None
         self.summer = None
@@ -23,6 +23,7 @@ class treeLayer(tf.keras.layers.Layer):
         self.Input_size = Input_size
         self.use_bias = use_bias
         self.divisor = divisor
+        self.non_neg = non_neg
 
     def build(self, input_shape):
 
@@ -33,9 +34,15 @@ class treeLayer(tf.keras.layers.Layer):
         initializer = init_weights(self.summer)
         initializer = tf.keras.initializers.Constant(initializer)
 
+        if self.non_neg:
+            constraint = tf.keras.constraints.NonNeg
+        else:
+            constraint = None
+
         self.kernel = self.add_weight(shape=(1, self.Input_size),
                                       initializer=initializer,
                                       trainable=True, dtype=tf.float32,
+                                      constraint=constraint,
                                       name='kernel')
 
         self.summer = tf.convert_to_tensor(self.summer, dtype=tf.float32)
