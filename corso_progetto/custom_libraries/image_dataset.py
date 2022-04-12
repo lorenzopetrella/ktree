@@ -95,13 +95,17 @@ class ImageDataset:
 
         self.images = np.pad(self.images, ((0, 0), (2, 2), (2, 2), (0, 0)))
 
-    def vectorize(self, merge_channels=False):
+    def vectorize(self, merge_channels=False, by_row=True):
         """
         Transforms image from pixel matrix with shape (H,W,C) to linear vector
         :param merge_channels: if True, the pixel vectors from each channel will be concatenated
+        :param by_row: if True, concatenate pixels by row, otherwise by column
         """
 
-        self.images = np.transpose(self.images, (0, 3, 1, 2))
+        if by_row:
+            self.images = np.transpose(self.images, (0, 3, 1, 2))
+        else:
+            self.images = np.transpose(self.images, (0, 3, 2, 1))
 
         if merge_channels:
             self.images = np.reshape(self.images, [len(self.images), -1])
