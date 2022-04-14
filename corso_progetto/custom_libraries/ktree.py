@@ -65,7 +65,7 @@ class treeLayer(tf.keras.layers.Layer):
         return x
 
 
-def create_model(input_size, num_trees=1, use_bias=False):
+def create_model(input_size, num_trees=1, use_bias=False, non_neg=False):
     model = tf.keras.Sequential()
     while input_size > num_trees:
 
@@ -75,10 +75,15 @@ def create_model(input_size, num_trees=1, use_bias=False):
         else:
             divisor = 2
 
-        model.add(treeLayer(input_size, use_bias=use_bias, divisor=divisor))
+        model.add(treeLayer(input_size, use_bias=use_bias, divisor=divisor, non_neg=non_neg))
         input_size = input_size // divisor
 
-    model.add(tf.keras.layers.Dense(units=1, activation='sigmoid', use_bias=use_bias))
+    if non_neg:
+        constraint = tf.keras.constraints.NonNeg
+    else:
+        constraint = None
+
+    model.add(tf.keras.layers.Dense(units=1, activation='sigmoid', use_bias=use_bias, kernel_constraint=constraint))
 
     model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=1e-3, epsilon=1e-08),
                   loss=tf.keras.losses.BinaryCrossentropy(reduction=tf.keras.losses.Reduction.AUTO),
