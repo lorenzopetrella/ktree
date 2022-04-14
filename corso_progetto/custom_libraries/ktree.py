@@ -35,7 +35,7 @@ class treeLayer(tf.keras.layers.Layer):
         initializer = tf.keras.initializers.Constant(initializer)
 
         if self.non_neg:
-            constraint = tf.keras.constraints.NonNeg
+            constraint = tf.keras.constraints.NonNeg()
         else:
             constraint = None
 
@@ -79,7 +79,7 @@ def create_model(input_size, num_trees=1, use_bias=False, non_neg=False):
         input_size = input_size // divisor
 
     if non_neg:
-        constraint = tf.keras.constraints.NonNeg
+        constraint = tf.keras.constraints.NonNeg()
     else:
         constraint = None
 
