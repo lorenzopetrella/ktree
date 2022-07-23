@@ -1,0 +1,2 @@
+model_checkpoint_path: "tile_rc_not-trainable_t10_weights"
+all_model_checkpoint_paths: "tile_rc_not-trainable_t10_weights"

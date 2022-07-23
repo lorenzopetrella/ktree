@@ -1,0 +1,2 @@
+model_checkpoint_path: "ktree_checkpoint"
+all_model_checkpoint_paths: "ktree_checkpoint"

@@ -103,15 +103,15 @@ def train_test_ktree(model, trainloader, validloader, testloader, epochs=10, ran
         valid_loss = np.average(valid_losses)
 
         # early_stopping needs the validation loss to check if it has decreased,
-        # and if it has, it will make a checkpoint of the current model
+        # and if it has, it will make a checkpoint_1 of the current model
         early_stopping(valid_loss, model)
 
         if early_stopping.early_stop:
             print("Early stopping")
             break
 
-    # load the last checkpoint with the best model
-    #    model.load_state_dict(torch.load('checkpoint.pt'))
+    # load the last checkpoint_1 with the best model
+    #    model.load_state_dict(torch.load('checkpoint_1.pt'))
 
     print('Finished Training, %d epochs' % (epoch + 1))
 
@@ -226,15 +226,15 @@ def train_test_fc(model, trainloader, validloader, testloader, epochs=10, patien
         valid_loss = np.average(valid_losses)
 
         # early_stopping needs the validation loss to check if it has decresed,
-        # and if it has, it will make a checkpoint of the current model
+        # and if it has, it will make a checkpoint_1 of the current model
         early_stopping(valid_loss, model)
 
         if early_stopping.early_stop:
             print("Early stopping")
             break
 
-    # load the last checkpoint with the best model
-    #    model.load_state_dict(torch.load('checkpoint.pt'))
+    # load the last checkpoint_1 with the best model
+    #    model.load_state_dict(torch.load('checkpoint_1.pt'))
 
     print('Finished Training, %d epochs' % (epoch + 1))
 
