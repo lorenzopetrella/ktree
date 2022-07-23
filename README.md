@@ -13,6 +13,11 @@ Having verified the correspondence between the results obtained with the impleme
 The main results obtained throughout the project show that repeating inputs through different image unrolling techniques guarantees, depending on what the pictures represent, a significant increase in the accuracy of the classification. Furthermore, unlike Jones and Kording, the asymmetry of the dendritic tree, which is more realistic from a biological standpoint, has been proven not to deteriorate the performance of the model. It has also been observed that building a model by assembling simpler dendritic trees, despite greatly reducing the training time thanks to careful expedients, determines a negligible or otherwise contained decrease in the goodness of the classifier. Lastly, although generally unjustified from a biological point of view, the addition of a biasing contribution at each fork of the dendritic tree, as well as the possibility for trainable weights to assume negative values, have been shown to cause a significant increase in the performance of the model.
 
 
+#### How-To:
+The final code for the project, together with the results presented in the thesis document, can be found in /corso_progetto_definitivo.
+A previous version of such code can be found as Jupyter Notebooks in /corso_progetto.
+
+
 #### Credits:
 
 This project is based on the previous study conducted by I.S. Jones and K.P. Kording, "Can Single Neurons Solve MNIST? The Computational Power of Biological Dendritic Trees". Part of their code has been used and/or adapted for the purposes of this thesis.
